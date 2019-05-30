@@ -11,14 +11,14 @@ namespace AlgorithmsDataStructures
         public static void Main(String[] args)
         {
             
-            Dictionary<int, int> dick = new Dictionary<int, int>();
-            dick.Add(0, 12);
-            dick.Add(1, 24);
-            dick.Add(2, 36);
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            dic.Add(0, 12);
+            dic.Add(1, 24);
+            dic.Add(2, 36);
             int i;
 
 
-            foreach (KeyValuePair<int, int> keyValue in dick)
+            foreach (KeyValuePair<int, int> keyValue in dic)
             {
                 i = keyValue.Value;
             }
