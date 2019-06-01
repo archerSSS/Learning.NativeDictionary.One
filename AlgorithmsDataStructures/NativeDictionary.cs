@@ -39,7 +39,7 @@ namespace AlgorithmsDataStructures
                 {
                     if (slots[nx] == key) return true;
                     nx++;
-                    if (nx <= size) nx = 0;
+                    if (nx >= size) nx = 0;
                 }
             }
             return false;

@@ -387,6 +387,25 @@ namespace AlgoTest_1
 
 
         [TestMethod]
+        public void TestA_IsKey_6()
+        {
+            int size = 4;
+
+            NativeDictionary<int> nat = new NativeDictionary<int>(size);
+
+            nat.Put("one", 1);
+            nat.Put("two", 2);
+            nat.Put("three", 3);
+            nat.Put("four", 4);
+
+            Assert.AreEqual(true, nat.IsKey("one"));
+            Assert.AreEqual(true, nat.IsKey("two"));
+            Assert.AreEqual(true, nat.IsKey("three"));
+            Assert.AreEqual(true, nat.IsKey("four"));
+        }
+
+
+        [TestMethod]
         public void TestB_Put_1()
         {
             NativeDictionary<string> nat = new NativeDictionary<string>(16);
