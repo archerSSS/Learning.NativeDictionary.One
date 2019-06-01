@@ -47,7 +47,7 @@ namespace AlgorithmsDataStructures
 
         public void Put(string key, T value)
         {
-            if (!IsKey(key) && key != null && value != null)
+            if (key != null && value != null)
             {
                 int nx = HashFun(key);
                 for (int i = 0; i < size; i++)
