@@ -19,40 +19,48 @@ namespace AlgorithmsDataStructures
 
         public int HashFun(string key)
         {
-            int nx = 0;
-            char[] chs = key.ToCharArray();
-            for (int i = 0; i < chs.Length; i++)
-                nx += Convert.ToInt32(chs[i]);
-            return (55 * nx + 3) % 95 % size;
+            if (key != null)
+            {
+                int nx = 0;
+                char[] chs = key.ToCharArray();
+                for (int i = 0; i < chs.Length; i++)
+                    nx += Convert.ToInt32(chs[i]);
+                return (55 * nx + 3) % 95 % size;
+            }
             return 0;
         }
 
         public bool IsKey(string key)
         {
-            int nx = HashFun(key);
-            for (int i = 0; i < size; i++)
+            if (key != null)
             {
-                if (slots[nx] == key) return true;
-                nx++;
-                if (nx <= size) nx = 0;
+                int nx = HashFun(key);
+                for (int i = 0; i < size; i++)
+                {
+                    if (slots[nx] == key) return true;
+                    nx++;
+                    if (nx <= size) nx = 0;
+                }
             }
             return false;
         }
 
         public void Put(string key, T value)
         {
-            if (IsKey(key)) return; 
-            int nx = HashFun(key);
-            for (int i = 0; i < size; i++)
+            if (!IsKey(key) && key != null && value != null)
             {
-                if (slots[nx] == null)
+                int nx = HashFun(key);
+                for (int i = 0; i < size; i++)
                 {
-                    slots[nx] = key;
-                    values[nx] = value;
-                    break;
+                    if (slots[nx] == null)
+                    {
+                        slots[nx] = key;
+                        values[nx] = value;
+                        break;
+                    }
+                    nx++;
+                    if (nx >= size) nx = 0;
                 }
-                nx++;
-                if (nx >= size) nx = 0;
             }
         }
 

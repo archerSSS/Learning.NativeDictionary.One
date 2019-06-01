@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsDataStructures
 {
-    public class Program
+    public class BitBagE : BitBag
     {
-        public static void Main(String[] args)
+       
+        public int valueE;
+
+
+        public BitBagE(int v) : base(v)
         {
-            
+            valueE = v;
         }
     }
 }

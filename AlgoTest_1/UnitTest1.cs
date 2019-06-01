@@ -265,6 +265,21 @@ namespace AlgoTest_1
 
 
         [TestMethod]
+        public void TestA_Put_5()
+        {
+            NativeDictionary<int> nat = new NativeDictionary<int>(16);
+
+            nat.Put("1", 1);
+            nat.Put("11", 2);
+            nat.Put("111", 3);
+
+            Assert.AreEqual(1, nat.Get("1"));
+            Assert.AreEqual(2, nat.Get("11"));
+            Assert.AreEqual(3, nat.Get("111"));
+        }
+
+
+        [TestMethod]
         public void TestA_IsKey_1()
         {
             int size = 16;
@@ -274,6 +289,8 @@ namespace AlgoTest_1
             nat.Put("one", 1);
 
             Assert.AreEqual(true, nat.IsKey("one"));
+            Assert.AreEqual(false, nat.IsKey("on"));
+            Assert.AreEqual(false, nat.IsKey("omf"));
         }
 
 
@@ -300,6 +317,34 @@ namespace AlgoTest_1
 
             Assert.AreEqual(false, nat.IsKey("one"));
             Assert.AreEqual(false, nat.IsKey("key"));
+            Assert.AreEqual(false, nat.IsKey(" "));
+        }
+
+
+        [TestMethod]
+        public void TestA_IsKey_4()
+        {
+            int size = 4;
+
+            NativeDictionary<int> nat = new NativeDictionary<int>(size);
+            nat.Put(" ", 1);
+
+            Assert.AreEqual(false, nat.IsKey("one"));
+            Assert.AreEqual(false, nat.IsKey("key"));
+        }
+
+
+        [TestMethod]
+        public void TestA_IsKey_5()
+        {
+            int size = 16;
+
+            NativeDictionary<int> nat = new NativeDictionary<int>(size);
+
+            nat.Put("one", 1);
+
+            Assert.AreEqual(false, nat.IsKey(""));
+            Assert.AreEqual(false, nat.IsKey(null));
         }
 
 
@@ -380,6 +425,97 @@ namespace AlgoTest_1
             Assert.AreEqual("12", nat.Get("three"));
             Assert.AreEqual("20", nat.Get("four"));
             Assert.AreEqual("34", nat.Get("five"));
+        }
+
+
+        [TestMethod]
+        public void TestB_Put_5()
+        {
+            NativeDictionary<string> nat = new NativeDictionary<string>(16);
+
+            nat.Put("1", "1");
+            nat.Put("11", "2");
+            nat.Put("111", "3");
+
+            Assert.AreEqual("1", nat.Get("1"));
+            Assert.AreEqual("2", nat.Get("11"));
+            Assert.AreEqual("3", nat.Get("111"));
+        }
+
+
+        [TestMethod]
+        public void TestB_Put_6()
+        {
+            int size = 16;
+            NativeDictionary<string> nat = new NativeDictionary<string>(size);
+            nat.Put(null, "1");
+
+            for (int i = 0; i < size; i++)
+                Assert.AreEqual(true, nat.values[i] == null);
+        }
+
+
+        [TestMethod]
+        public void TestB_Put_7()
+        {
+            int size = 16;
+            NativeDictionary<string> nat = new NativeDictionary<string>(size);
+            nat.Put("key", null);
+
+            for (int i = 0; i < size; i++)
+            {
+                Assert.AreEqual(true, nat.values[i] == null);
+                Assert.AreEqual(true, nat.slots[i] == null);
+            }
+        }
+
+
+        [TestMethod]
+        public void TestC_Put_1()
+        {
+            int size = 16;
+            NativeDictionary<BitBag> nat = new NativeDictionary<BitBag>(size);
+
+            nat.Put("key1", new BitBag(1));
+            nat.Put("key2", new BitBag(2));
+
+            Assert.AreEqual(1, nat.Get("key1").value);
+            Assert.AreEqual(2, nat.Get("key2").value);
+        }
+
+
+        [TestMethod]
+        public void TestC_Put_2()
+        {
+            int size = 16;
+            BitBag bb1 = new BitBag(1);
+            BitBag bb2 = new BitBag(2);
+            NativeDictionary<BitBag> nat = new NativeDictionary<BitBag>(size);
+            
+            nat.Put("key1", bb1);
+            nat.Put("key2", bb2);
+
+            Assert.AreEqual(bb1, nat.Get("key1"));
+            Assert.AreEqual(bb2, nat.Get("key2"));
+        }
+
+
+        [TestMethod]
+        public void TestC_Put_3()
+        {
+            int size = 16;
+            BitBag bb1 = new BitBag(1);
+            BitBag bb2 = new BitBag(2);
+            BitBag bbe1 = new BitBagE(3);
+            NativeDictionary<BitBag> nat = new NativeDictionary<BitBag>(size);
+
+            nat.Put("key1", bb1);
+            nat.Put("key2", bb2);
+            nat.Put("key3", bbe1);
+
+            Assert.AreEqual(bb1, nat.Get("key1"));
+            Assert.AreEqual(bb2, nat.Get("key2"));
+            Assert.AreEqual(bbe1, nat.Get("key3"));
         }
     }
 }
