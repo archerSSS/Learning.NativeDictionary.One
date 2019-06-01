@@ -7,6 +7,44 @@ namespace AlgoTest_1
     [TestClass]
     public class UnitTest1
     {
+        [TestMethod]
+        public void Test1_FirstStartTest()
+        {
+            int size = 16;
+
+            string key1 = "key1";
+            int item1 = 1;
+
+            string key2 = "key2";
+            string item2 = "1";
+
+            string key3 = "key3";
+            BitBag item3 = new BitBag(1);
+
+            string key4 = "key4";
+            BitBagE item4 = new BitBagE(1);
+            
+            NativeDictionary<int> nat1 = new NativeDictionary<int>(size);
+            NativeDictionary<string> nat2 = new NativeDictionary<string>(size);
+            NativeDictionary<BitBag> nat3 = new NativeDictionary<BitBag>(size);
+
+            nat1.Put(key1, item1);
+            nat2.Put(key2, item2);
+            nat3.Put(key3, item3);
+            nat3.Put(key4, item4);
+
+            Assert.AreEqual(true, nat1.IsKey(key1));
+            Assert.AreEqual(item1, nat1.Get(key1));
+
+            Assert.AreEqual(true, nat2.IsKey(key2));
+            Assert.AreEqual(item2, nat2.Get(key2));
+
+            Assert.AreEqual(true, nat3.IsKey(key3));
+            Assert.AreEqual(item3, nat3.Get(key3));
+            Assert.AreEqual(true, nat3.IsKey(key4));
+            Assert.AreEqual(item4, nat3.Get(key4));
+        }
+
 
         // Проверка на работоспособность метода Get();
         // Одно значение;
