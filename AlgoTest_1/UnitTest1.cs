@@ -119,8 +119,8 @@ namespace AlgoTest_1
             int size = 4;
             string key1 = "one";
             string key2 = "one";
-            int index1 = 0;
-            int index2 = 0;
+            int index1 = 10;
+            int index2 = 10;
 
             NativeDictionary<int> nat = new NativeDictionary<int>(size);
             nat.Put(key1, 1);
@@ -128,10 +128,13 @@ namespace AlgoTest_1
             
             for (int i = 0; i < size; i++)
             {
-                if (nat.values[i] == 2) index2 = i;
+                if (nat.values[i] == 1) index1 = i;
+                if (nat.values[i] == 2) index2 = i; 
             }
-
-            Assert.AreEqual(0, index2);
+                
+            
+            Assert.AreEqual(true, index1 == 10);
+            Assert.AreEqual(true, index2 != 10);
         }
 
         // Проверка на работоспособность метода HashFun();
@@ -406,6 +409,41 @@ namespace AlgoTest_1
 
 
         [TestMethod]
+        public void TestA_IsKey_7()
+        {
+            int size = 1;
+
+            NativeDictionary<int> nat1 = new NativeDictionary<int>(size);
+            NativeDictionary<int> nat2 = new NativeDictionary<int>(size);
+            NativeDictionary<int> nat3 = new NativeDictionary<int>(size);
+
+            nat1.Put("one", 1);
+            nat2.Put("two", 1);
+            nat3.Put("four", 1);
+
+            Assert.AreEqual(true, nat1.IsKey("one"));
+            Assert.AreEqual(true, nat2.IsKey("two"));
+            Assert.AreEqual(true, nat3.IsKey("four"));
+        }
+
+
+        [TestMethod]
+        public void TestA_IsKey_8()
+        {
+            int size = 16;
+            string key1 = "";
+
+            NativeDictionary<int> nat = new NativeDictionary<int>(size);
+
+            Assert.AreEqual(false, nat.IsKey(""));
+
+            nat.Put(key1, 1);
+
+            Assert.AreEqual(true, nat.IsKey(""));
+        }
+
+
+        [TestMethod]
         public void TestB_Put_1()
         {
             NativeDictionary<string> nat = new NativeDictionary<string>(16);
@@ -522,8 +560,14 @@ namespace AlgoTest_1
             for (int i = 0; i < size; i++)
             {
                 Assert.AreEqual(true, nat.values[i] == null);
-                Assert.AreEqual(true, nat.slots[i] == null);
+                if (nat.slots[i] != null)
+                {
+                    Assert.AreEqual(true, nat.slots[i] != null);
+                    nat.values[i] = "notNull";
+                    break;
+                }
             }
+            Assert.AreEqual("notNull", nat.Get("key"));
         }
 
 
@@ -574,5 +618,147 @@ namespace AlgoTest_1
             Assert.AreEqual(bb2, nat.Get("key2"));
             Assert.AreEqual(bbe1, nat.Get("key3"));
         }
+
+
+        [TestMethod]
+        public void TestC_IsKey_1()
+        {
+            int size = 16;
+            BitBag bb1 = new BitBag(1);
+            BitBag bb2 = new BitBag(2);
+            BitBagE bb3 = new BitBagE(3);
+            BitBagE bb4 = new BitBagE(4);
+            BitBag bb5 = new BitBag(5);
+            BitBag bb6 = new BitBag(6);
+            BitBag bb7 = new BitBag(7);
+            BitBagE bb8 = new BitBagE(8);
+            BitBagE bb9 = new BitBagE(9);
+            BitBagE bb10 = new BitBagE(10);
+            BitBag bb11 = new BitBag(11);
+            BitBagE bb12 = new BitBagE(12);
+            BitBag bb13 = new BitBag(13);
+            BitBag bb14 = new BitBag(14);
+            BitBagE bb15 = new BitBagE(15);
+            BitBagE bb16 = new BitBagE(16);
+
+            string key1 = "key1";
+            string key2 = "key2";
+            string key3 = "key3";
+            string key4 = "key4";
+            string key5 = "key5";
+            string key6 = "key6";
+            string key7 = "key7";
+            string key8 = "key8";
+            string key9 = "key9";
+            string key10 = "key10";
+            string key11 = "key11";
+            string key12 = "key12";
+            string key13 = "key13";
+            string key14 = "key14";
+            string key15 = "key15";
+            string key16 = "key16";
+
+            NativeDictionary<BitBag> nat = new NativeDictionary<BitBag>(size);
+
+            nat.Put(key1, bb1);
+            nat.Put(key2, bb2);
+            nat.Put(key3, bb3);
+            nat.Put(key4, bb4);
+            nat.Put(key5, bb5);
+            nat.Put(key6, bb6);
+            nat.Put(key7, bb7);
+            nat.Put(key8, bb8);
+            nat.Put(key9, bb9);
+            nat.Put(key10, bb10);
+            nat.Put(key11, bb11);
+            nat.Put(key12, bb12);
+            nat.Put(key13, bb13);
+            nat.Put(key14, bb14);
+            nat.Put(key15, bb15);
+            nat.Put(key16, bb16);
+
+            Assert.AreEqual(true, nat.IsKey(key1));
+            Assert.AreEqual(true, nat.IsKey(key2));
+            Assert.AreEqual(true, nat.IsKey(key3));
+            Assert.AreEqual(true, nat.IsKey(key4));
+            Assert.AreEqual(true, nat.IsKey(key5));
+            Assert.AreEqual(true, nat.IsKey(key6));
+            Assert.AreEqual(true, nat.IsKey(key7));
+            Assert.AreEqual(true, nat.IsKey(key8));
+            Assert.AreEqual(true, nat.IsKey(key9));
+            Assert.AreEqual(true, nat.IsKey(key10));
+            Assert.AreEqual(true, nat.IsKey(key11));
+            Assert.AreEqual(true, nat.IsKey(key12));
+            Assert.AreEqual(true, nat.IsKey(key13));
+            Assert.AreEqual(true, nat.IsKey(key14));
+            Assert.AreEqual(true, nat.IsKey(key15));
+            Assert.AreEqual(true, nat.IsKey(key16));
+        }
+
+
+
+
+        [TestMethod]
+        public void TestA_15()
+        {
+            int size = 8;
+
+            NativeDictionary<int> nat = new NativeDictionary<int>(size);
+
+            nat.Put("1", 1);
+            nat.Put("2", 2);
+            nat.Put("3", 3);
+            nat.Put("4", 4);
+            nat.Put("5", 5);
+            nat.Put("6", 6);
+            nat.Put("7", 7);
+            nat.Put("8", 8);
+
+            Assert.AreEqual(true, nat.IsKey("1"));
+            Assert.AreEqual(true, nat.IsKey("2"));
+            Assert.AreEqual(true, nat.IsKey("3"));
+            Assert.AreEqual(true, nat.IsKey("4"));
+            Assert.AreEqual(true, nat.IsKey("5"));
+            Assert.AreEqual(true, nat.IsKey("6"));
+            Assert.AreEqual(true, nat.IsKey("7"));
+            Assert.AreEqual(true, nat.IsKey("8"));
+            
+            for (int i = 0; i < 100000; i++)
+                nat.Put("a" + 1, 7);
+
+            Assert.AreEqual(true, nat.IsKey("1"));
+            Assert.AreEqual(true, nat.IsKey("2"));
+            Assert.AreEqual(true, nat.IsKey("3"));
+            Assert.AreEqual(true, nat.IsKey("4"));
+            Assert.AreEqual(true, nat.IsKey("5"));
+            Assert.AreEqual(true, nat.IsKey("6"));
+            Assert.AreEqual(true, nat.IsKey("7"));
+            Assert.AreEqual(true, nat.IsKey("8"));
+
+            for (int i = 0; i < 100000; i++)
+                nat.Put("7", 10 + i);
+
+            Assert.AreEqual(true, nat.IsKey("1"));
+            Assert.AreEqual(true, nat.IsKey("2"));
+            Assert.AreEqual(true, nat.IsKey("3"));
+            Assert.AreEqual(true, nat.IsKey("4"));
+            Assert.AreEqual(true, nat.IsKey("5"));
+            Assert.AreEqual(true, nat.IsKey("6"));
+            Assert.AreEqual(true, nat.IsKey("7"));
+            Assert.AreEqual(true, nat.IsKey("8"));
+
+            for (int i = 1; i < 100000; i++)
+                nat.Put("" + i, 10 + i);
+
+            Assert.AreEqual(true, nat.IsKey("1"));
+            Assert.AreEqual(true, nat.IsKey("2"));
+            Assert.AreEqual(true, nat.IsKey("3"));
+            Assert.AreEqual(true, nat.IsKey("4"));
+            Assert.AreEqual(true, nat.IsKey("5"));
+            Assert.AreEqual(true, nat.IsKey("6"));
+            Assert.AreEqual(true, nat.IsKey("7"));
+            Assert.AreEqual(true, nat.IsKey("8"));
+        }
+
     }
 }

@@ -47,12 +47,12 @@ namespace AlgorithmsDataStructures
 
         public void Put(string key, T value)
         {
-            if (key != null && value != null)
+            if (key != null)
             {
                 int nx = HashFun(key);
                 for (int i = 0; i < size; i++)
                 {
-                    if (slots[nx] == null)
+                    if (slots[nx] == null || slots[nx] == key)
                     {
                         slots[nx] = key;
                         values[nx] = value;
